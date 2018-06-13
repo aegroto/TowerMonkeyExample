@@ -1,2 +1,3 @@
 include 'assets'
-rootProject.name = 'JMEVSCodeTemplate'
+include 'TowerMonkey'
+rootProject.name = 'TowerMonkeyExample'
