@@ -1,7 +1,6 @@
 .gradle/
 .classpath/
 .settings/
-TowerMonkey/
 build/
 bin/
 *.so
