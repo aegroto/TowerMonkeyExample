@@ -1,0 +1,3 @@
+[submodule "TowerMonkey"]
+	path = TowerMonkey
+	url = git@github.com:aegroto/TowerMonkey.git
