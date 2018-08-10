@@ -1,13 +1,15 @@
 package com.aegroto.tmexample.states;
 
 import com.aegroto.towermonkey.state.MapAppState;
-import com.aegroto.towermonkey.state.PathAppState;
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
+import com.jme3.input.KeyInput;
+import com.jme3.input.controls.KeyTrigger;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
+import com.jme3.util.MaterialDebugAppState;
 
 /**
  *
@@ -26,7 +28,13 @@ public class InGameAppState extends BaseAppState {
     }
 
     @Override
-    protected void initialize(Application aplctn) { }
+    protected void initialize(Application app) {
+        MaterialDebugAppState materialDebugAppState = new MaterialDebugAppState();
+
+        materialDebugAppState.registerBinding(new KeyTrigger(KeyInput.KEY_U), rootNode);
+
+        app.getStateManager().attach(materialDebugAppState);
+    }
 
     @Override
     protected void cleanup(Application aplctn) { }
