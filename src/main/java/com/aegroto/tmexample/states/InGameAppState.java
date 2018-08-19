@@ -1,8 +1,7 @@
 package com.aegroto.tmexample.states;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import com.aegroto.tmexample.entity.EntitySoldier;
+import com.aegroto.towermonkey.state.EntityAppState;
 import com.aegroto.towermonkey.state.MapAppState;
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
@@ -22,10 +21,11 @@ import com.jme3.util.MaterialDebugAppState;
  */
 public class InGameAppState extends BaseAppState {
     private final MapAppState mapAppState;
+    private final EntityAppState entityAppState;
+    private MaterialDebugAppState materialDebugAppState;
 
     private final Node sceneRootNode, rootNode;
 
-    private MaterialDebugAppState materialDebugAppState;
 
     // private AssetKey<Material> mapMaterialKey, seaMaterialKey;
 
@@ -51,6 +51,8 @@ public class InGameAppState extends BaseAppState {
                 materialDebugAppState.registerBinding(new KeyTrigger(KeyInput.KEY_R), mapGeom);
             }
         };
+
+        this.entityAppState = new EntityAppState(sceneRootNode);
     }
 
     @Override
@@ -78,6 +80,8 @@ public class InGameAppState extends BaseAppState {
         mapAppState.setSeaMaterial(seaMaterial);
         
         getStateManager().attach(mapAppState);
+        getStateManager().attach(entityAppState);
+
     }
 
     @Override
@@ -87,7 +91,9 @@ public class InGameAppState extends BaseAppState {
 
     @Override
     public void update(float tpf) {
-        // Logger.getLogger(InGameAppState.class.getName()).log(Level.INFO, "" + getStateManager().getState(MaterialDebugAppState.class));
+        if(entityAppState.isEnabled() && FastMath.nextRandomFloat() > .96f) {
+            entityAppState.addEntity(new EntitySoldier(getApplication().getAssetManager()));
+        }
     }
 
     /*protected void reloadMapMaterials(boolean clearCache) {

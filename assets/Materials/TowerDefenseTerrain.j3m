@@ -24,7 +24,7 @@ Material Terrain : MatDefs/TowerDefenseTerrain/TowerDefenseTerrain.j3md {
         MountainParallaxMap : Repeat Textures/better terrain/mountain/mountain_h.png
         MountainParallaxHeight : 0.005
 
-        TriplanarMaxBlending : 1.0 
+        TriplanarMaxBlending : 0.001 
 
         // Triplanar Scaling
         DitchTexScale : 0.03125
