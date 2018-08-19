@@ -22,7 +22,7 @@ import com.jme3.util.MaterialDebugAppState;
 public class InGameAppState extends BaseAppState {
     private final MapAppState mapAppState;
     private final EntityAppState entityAppState;
-    private MaterialDebugAppState materialDebugAppState;
+    // private MaterialDebugAppState materialDebugAppState;
 
     private final Node sceneRootNode, rootNode;
 
@@ -48,7 +48,7 @@ public class InGameAppState extends BaseAppState {
             protected void onEnable() {
                 super.onEnable();
 
-                materialDebugAppState.registerBinding(new KeyTrigger(KeyInput.KEY_R), mapGeom);
+                // materialDebugAppState.registerBinding(new KeyTrigger(KeyInput.KEY_R), mapGeom);
             }
         };
 
@@ -57,8 +57,8 @@ public class InGameAppState extends BaseAppState {
 
     @Override
     protected void initialize(Application app) {
-        materialDebugAppState = new MaterialDebugAppState();
-        getStateManager().attach(materialDebugAppState);
+        // materialDebugAppState = new MaterialDebugAppState();
+        // getStateManager().attach(materialDebugAppState);
     }
 
     @Override
