@@ -43,7 +43,7 @@ public class InGameAppState extends BaseAppState {
         this.sceneRootNode = sceneRootNode;
 
         this.rootNode = new Node();
-        this.mapAppState = new MapAppState(rootNode, 256, 64, 24, 24, 24) {
+        this.mapAppState = new MapAppState(rootNode, 256, 64, 24, 24, 24, 47372) {
             @Override
             protected void onEnable() {
                 super.onEnable();
@@ -92,7 +92,7 @@ public class InGameAppState extends BaseAppState {
     @Override
     public void update(float tpf) {
         if(entityAppState.isEnabled() && FastMath.nextRandomFloat() > .96f) {
-            entityAppState.addEntity(new EntitySoldier(getApplication().getAssetManager()));
+            entityAppState.addWalkingEntity(new EntitySoldier(getApplication().getAssetManager(), .02f));
         }
     }
 
