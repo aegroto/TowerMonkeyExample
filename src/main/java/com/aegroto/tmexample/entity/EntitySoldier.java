@@ -20,10 +20,6 @@ public class EntitySoldier extends WalkingEntity {
         geometry.setMaterial(mat);
     }
 
-    public void update() {
-
-    }
-
     protected void onPathEnd() {
 
     }

@@ -6,6 +6,7 @@ import com.aegroto.towermonkey.state.MapAppState;
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.input.KeyInput;
+import com.jme3.input.controls.AnalogListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState.BlendMode;
@@ -13,7 +14,6 @@ import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
-import com.jme3.util.MaterialDebugAppState;
 
 /**
  *
@@ -29,15 +29,16 @@ public class InGameAppState extends BaseAppState {
 
     // private AssetKey<Material> mapMaterialKey, seaMaterialKey;
 
-    /*private final AnalogListener analogListener = new AnalogListener(){    
+    private final AnalogListener analogListener = new AnalogListener(){    
         @Override
         public void onAnalog(String name, float value, float tpf) {
-            if(name.equals("UpdateMats")) {
-                reloadMapMaterials(true);
-                mapAppState.updateMaterials();
+            if(name.equals("SpawnEntity")) {
+                if(entityAppState.isEnabled()) {
+                    entityAppState.addWalkingEntity(new EntitySoldier(getApplication().getAssetManager(), 1f));
+                }
             }
         }
-    };*/
+    };
     
     public InGameAppState(Node sceneRootNode) {
         this.sceneRootNode = sceneRootNode;
@@ -59,6 +60,10 @@ public class InGameAppState extends BaseAppState {
     protected void initialize(Application app) {
         // materialDebugAppState = new MaterialDebugAppState();
         // getStateManager().attach(materialDebugAppState);
+
+        getApplication().getInputManager().addMapping("SpawnEntity", new KeyTrigger(KeyInput.KEY_SPACE));
+
+        getApplication().getInputManager().addListener(analogListener, "SpawnEntity");
     }
 
     @Override
@@ -91,20 +96,6 @@ public class InGameAppState extends BaseAppState {
 
     @Override
     public void update(float tpf) {
-        if(entityAppState.isEnabled() && FastMath.nextRandomFloat() > .96f) {
-            entityAppState.addWalkingEntity(new EntitySoldier(getApplication().getAssetManager(), .02f));
-        }
+
     }
-
-    /*protected void reloadMapMaterials(boolean clearCache) {
-        if(clearCache) {
-            getApplication().getAssetManager().deleteFromCache(mapMaterialKey);
-            getApplication().getAssetManager().deleteFromCache(seaMaterialKey);                
-        }
-
-        seaMaterialKey = (AssetKey<Material>) seaMaterial.getKey();
-
-        mapAppState.setMapMaterial(mapMaterial);
-        mapAppState.setSeaMaterial(seaMaterial);
-    }*/
 }
