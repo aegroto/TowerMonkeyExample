@@ -40,7 +40,7 @@ public class InGameAppState extends BaseAppState {
         this.sceneRootNode = sceneRootNode;
 
         this.rootNode = new Node();
-        this.mapAppState = new MapAppState(rootNode, 256, 64, 24, 24, 24, 47372) {
+        this.mapAppState = new MapAppState(rootNode) {
             @Override
             protected void onEnable() {
                 super.onEnable();
@@ -74,7 +74,36 @@ public class InGameAppState extends BaseAppState {
 
         mapAppState.setMapMaterial(mapMaterial);
         mapAppState.setSeaMaterial(seaMaterial);
+
+        mapAppState.setMapSize(256);
+        mapAppState.setGridSize(64);
+        mapAppState.setDitchSize(24);
+        mapAppState.setBattlegroundOffsetX(24);
+        mapAppState.setBattlegroundOffsetY(24);
+        mapAppState.setSeed(47372);
+
+        mapAppState.setMinDitchHeight(-8.0f);
+        mapAppState.setDitchVariation(.5f);
+
+        mapAppState.setPathTileBorderFactor(.15f);
+        mapAppState.setPathTileBorderNeckFactor(.05f);
+        mapAppState.setPathVariation(.25f);
         
+        mapAppState.setMinHillHeight(2f);        
+        mapAppState.setHillVariation(.25f);
+
+        int battlegroundGridSize = mapAppState.getMapSize() - mapAppState.getDitchSize() * 2;
+                
+        mapAppState.setTotalMountains(10);
+        mapAppState.setMountainMinSize((int) (battlegroundGridSize * .05f));
+        mapAppState.setMountainMaxSize((int) (battlegroundGridSize * .1f));
+        mapAppState.setMountainMinLevels(battlegroundGridSize * 40);
+        mapAppState.setMountainMaxLevels(battlegroundGridSize * 50);
+        mapAppState.setMountainBorderFragmentation(.5f);
+        mapAppState.setMinMountainHeight(2f);     
+        mapAppState.setMountainVariation(.1f);
+        mapAppState.setMountainBaseTerrainThreshold(3f);
+
         getStateManager().attach(mapAppState);
         getStateManager().attach(entityAppState);
 
