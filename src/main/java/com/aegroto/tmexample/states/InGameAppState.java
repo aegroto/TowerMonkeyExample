@@ -22,12 +22,8 @@ import com.jme3.scene.Node;
 public class InGameAppState extends BaseAppState {
     private final MapAppState mapAppState;
     private final EntityAppState entityAppState;
-    // private MaterialDebugAppState materialDebugAppState;
 
     private final Node sceneRootNode, rootNode;
-
-
-    // private AssetKey<Material> mapMaterialKey, seaMaterialKey;
 
     private final AnalogListener analogListener = new AnalogListener(){    
         @Override
@@ -48,8 +44,6 @@ public class InGameAppState extends BaseAppState {
             @Override
             protected void onEnable() {
                 super.onEnable();
-
-                // materialDebugAppState.registerBinding(new KeyTrigger(KeyInput.KEY_R), mapGeom);
             }
         };
 
@@ -58,9 +52,6 @@ public class InGameAppState extends BaseAppState {
 
     @Override
     protected void initialize(Application app) {
-        // materialDebugAppState = new MaterialDebugAppState();
-        // getStateManager().attach(materialDebugAppState);
-
         getApplication().getInputManager().addMapping("SpawnEntity", new KeyTrigger(KeyInput.KEY_SPACE));
 
         getApplication().getInputManager().addListener(analogListener, "SpawnEntity");
